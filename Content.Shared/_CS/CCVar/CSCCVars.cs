@@ -18,4 +18,20 @@ public sealed class CSCVars
     /// </summary>
     public static readonly CVarDef<float> ConveyorCleanupIntervalSeconds =
     CVarDef.Create("conveyor.cleanup_interval_seconds", 51f, CVar.SERVERONLY);
+    /// Base delay (in seconds) before shuttle IFF status visual updates are applied.
+    /// Example: if set to 20, color changes wait at least 20 seconds.
+    /// </summary>
+    public static readonly CVarDef<int> ShuttleCrewUpdateBaseDelaySeconds =
+        CVarDef.Create("cs.shuttle.crew_update_base_delay", 20, CVar.SERVER);
+    /// <summary>
+    /// Extra randomized delay range (in seconds) added on top of base delay.
+    /// </summary>
+    public static readonly CVarDef<int> ShuttleCrewUpdateRandomJitterSeconds =
+        CVarDef.Create("cs.shuttle.crew_update_random_jitter", 25, CVar.SERVER);
+    /// <summary>
+    /// Hex color used when a player shuttle has no active crew.
+    /// Default is gray (#808080).
+    /// </summary>
+    public static readonly CVarDef<string> ShuttleInactiveCrewColor =
+        CVarDef.Create("cs.shuttle.inactive_crew_color", "#808080", CVar.SERVER);
 }
