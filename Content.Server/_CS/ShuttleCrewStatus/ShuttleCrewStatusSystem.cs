@@ -55,7 +55,6 @@ public sealed partial class ShuttleCrewStatusSystem : EntitySystem
             invokeImmediately: true);
 
         SubscribeLocalEvent<IFFComponent, MapInitEvent>(OnIFFMapInit);
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
         SubscribeLocalEvent<EntParentChangedMessage>(OnEntParentChanged);
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
 
@@ -110,15 +109,6 @@ public sealed partial class ShuttleCrewStatusSystem : EntitySystem
         crewStatus.OriginalColor = component.Color;
         crewStatus.HasActiveCrew = HasActivePlayersOnGrid(uid);
         crewStatus.PendingVisualUpdate = false;
-    }
-
-    private void OnRoundCleanup(RoundRestartCleanupEvent ev)
-    {
-        var query = EntityQueryEnumerator<ShuttleCrewStatusComponent>();
-        while (query.MoveNext(out var uid, out _))
-        {
-            RemComp<ShuttleCrewStatusComponent>(uid);
-        }
     }
 
     private void OnEntParentChanged(ref EntParentChangedMessage ev)
